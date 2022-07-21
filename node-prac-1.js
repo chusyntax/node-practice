@@ -51,3 +51,32 @@ console.log(findMeaning())
 //Callback queue (message queue, event queue) keeps track of which CB is ready to be executed
 //The CB queue is a FIFO queue ~ Oldest function is processsed first
 //Used so that all CB is executed in a reasonable amount of time without interupting each other
+
+//Four phases of the event loop
+//Timers (setTimeout, setInterval~Sets a function to be executed many times repeatedly,setImmediate(Csallback executed as soon as possible on the event loop))
+//I/O Callbacks
+//setImmediate
+//Close callbacks
+
+//Each has a queue of callbacks executed during that phase
+
+
+//Event loop flowing through different phases
+//On first iteration(tick) of event loop, first phase starts getting processed - Begins going through all timer callbacks-setTImeout and setInterval
+//Still in first tick, it starts to deal with I/O Callbacks ~ Majority of callback functions(Also anything that cant go into the other phases)
+//Then setImmediate ~ Runs right after all I/O callbacks are executed ~ Functions here run after those passed in timers
+//Close callbacks - executes when network connection or file is closed and you have a callback when it is closed ~ WHen all clsoed callbacks is done
+//Event loop makes sure all asynchronous functions eventually execute
+//When all is done, the event loop starts again
+
+//Idle and repair phase - used internally by Node
+
+
+//Node code send work to operating system with libuv which which then communicates at the lowest level to the CPU
+//CPU delegates tasks to different devices though communication channel called a Bus
+
+//node is good at servers whith tallking to other databases
+//Node is good at serving data for I/O heavy applications
+
+
+//Design pattern ~ Proven approaches tho solving problems that appear again and again in different programs or apps
