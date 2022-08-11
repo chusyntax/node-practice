@@ -37,3 +37,25 @@ res.on('end', ()=>{ //The end event is sent when there is no more data coming in
 // eg module.exports = {send,request}
 //In the module you want to import the function, you can use require('./node-prac-1.js')
 //Use destructuring when importing functions or data from modules with {}
+
+//Import
+
+//Can be a synonym for import
+// import {} from ''
+//For import, all you need is export{}
+
+//Node uses common.js since the begining.
+//Because of common.js, wwe need to change our file extentions to .mjs
+//You should also use the extention when importing
+
+
+//Index.js
+
+//Index.js is a special case in Node
+//Allows you to treat a folder like a module
+//It acts like a mini 'distribution centre'
+
+//You can also use the spread operator or object destruccturing
+//Should one use index.js
+//It needlessly complicates the module loading system
+//It also brings potential confussion with other developers
