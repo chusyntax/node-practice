@@ -88,3 +88,15 @@ server.listen(PORT,()=>{ //Expects a callback ~ Tells server what to do when it 
 //Different URLs are refered to as endpoints
 //Endpoints are responsible for a specific piece of functionlity provided by server 
 //Paramaterized route ~ Route/endpoint that can change
+
+//Same Origin Policy
+
+//Origin is a combination of the:
+// 1 ~ Protocol -  https://
+// 2 ~ Host - Tells us which server will be handling our request ~ google.com
+// 3 ~ Port ~ 443
+
+//Whenever one of these things changes, we are no longer at the same origin
+//We also cannot change the protocol
+
+//SOP ~ Security feature by browser that restricts what browser is allowed to load when browsing
