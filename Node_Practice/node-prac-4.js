@@ -50,8 +50,16 @@ server.on('request',(req,res)=>{
     // res is a writiable stream ~ We can write some headers to the response
 
     const items = req.url.split('/')// /friends/2 = ['', 'friends', '2']
+    if(req.method === "POST" && items[1] === 'friends'){ //For post requests to the server
+        req.on('data', (data)=>{
+            const friend = data.toString();
+            friends.push(JSON.parse(friend));
+            reqspipe(res)
+        }) //Body would have the data we want to pass to the server in the request which would be in {}
 
-   if(items[1] === 'friends'){
+    } 
+
+    else if(req.method === "GET" && items[1] === 'friends'){
     res.writeHead(200, { // Status code does default to 200
         "Content-Type": "application/json",
     });
@@ -61,7 +69,7 @@ server.on('request',(req,res)=>{
     } else{
     res.end(JSON.stringify(friends))
     } //~End function signals response is complete and ready to be sent back //To set data to passback to browser
-    } else if (items[1] === 'messages'){
+    } else if (req.method === "GET" && items[1] === 'messages'){
     res.setHeader("Content-Type", 'text/html')
     res.statusCode = 200
     res.write('<html>');
@@ -100,3 +108,13 @@ server.listen(PORT,()=>{ //Expects a callback ~ Tells server what to do when it 
 //We also cannot change the protocol
 
 //SOP ~ Security feature by browser that restricts what browser is allowed to load when browsing
+
+
+
+//CORS ~ Cross Origin Resource Sharing
+// Way of relaxing same origin policy restrictions
+//Makes us make apps that span different domains and origins
+
+//Header: Access Control Allow Origin: * ~ Allows requests from all origins
+// Its always safer to stsate the origins that can request
+//When it comes to security, its always better to whitelist than to blacklist
