@@ -61,3 +61,11 @@ app.listen(PORT, ()=>{ //This function runs when the server starts
 //Then is scripts, add, "watch": "nodemon (name of file).js"
 
 //Dev dependancies are only needed while developing our project
+
+
+//Middleware
+//Special functions that run between the request coming in and response coming out of our API
+
+//Middleware is created like this: app.use(function(req,res,next){})
+//Next is a function express gives us to call the next middleware
+//It controls the flow of our middleware
