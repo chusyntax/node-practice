@@ -1,52 +1,23 @@
-
-
 const express = require('express')
+
+const messagesController  = require('./controllers/messages.controller')
+
+const friendsController  = require('./controllers/friends.controller')
 
 const app = express() //This function is exported from express
 
 const PORT = 3000;
 
-friends = [
-    {
-        id:0,
-        name: 'Nikola Tesla'
-    },
-    {
-        id:0,
-        name: 'Bill Gates'
-    },
-    {
-        id:0,
-        name: 'Van Chu'
-    }
-]
 
-app.get('/friends', (req,res)=>{
-    res.json(friends) // You can use .json to be more specific
-})
 
-app.get('/friends/:friendId', (req,res)=>{ //You need to use the colon
-    const friendId = Number(req.params.friendId)//This is user input. We convert it to a number as that is how it will be in the url
+app.use(express.json())//This function is needed and used to register json parsing middleware
 
-    //This is for validation. Validation is used for values which we dont have full control of and to avoid unexpected bugs
-    const friend = friends[friendId]
-    if(friend){
-        res.status(200).json(friend)
-    } else{
-        res.status(404).json({
-            error: "This friend does not exist"
-        });
+app.post('/friends', friendsController.postFriend);
+app.get('/friends', friendsController.getFriends)
+app.get('/friends/:friendId', friendsController.getFriend)
 
-    }
-})
-
-app.get('/messages', (req,res)=>{
-    res.send('<ul><li>Hey Einstein</li></ul>')
-})
-
-app.post('/messages', (req,res)=>{
-   console.log("Updating messages")
-})
+app.get('/messages', messagesController.getMessages)
+app.post('/messages', messagesController.postMessage)
 
 app.listen(PORT, ()=>{ //This function runs when the server starts
     console.log(`Listening on Port ${PORT}...`)
@@ -69,3 +40,17 @@ app.listen(PORT, ()=>{ //This function runs when the server starts
 //Middleware is created like this: app.use(function(req,res,next){})
 //Next is a function express gives us to call the next middleware
 //It controls the flow of our middleware
+
+
+//Model-View-Controller (MVC)
+//A software design pattern that tells us how to organise various different pieces of code based on what they do
+
+
+//User interacts with the components by:
+
+//User uses controller (by making requests)
+//Controller understands the processes the user requests and manipulates the model accordingly (Adding/removing data from DB)
+//When the model is updated by that controller, the views react to those changes and the user sees the updated data, however it is presented by that view
+
+//Summaried:
+//User uses controller => Controller manipulates model => Model updates view => View sees User 
