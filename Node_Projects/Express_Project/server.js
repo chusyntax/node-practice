@@ -1,8 +1,8 @@
 const express = require('express')
 
-const messagesController  = require('./controllers/messages.controller')
+const friendsRouter = require('./routes/friends.router')
 
-const friendsController  = require('./controllers/friends.controller')
+const messagesRouter = require('./routes/messages.router');
 
 const app = express() //This function is exported from express
 
@@ -12,12 +12,8 @@ const PORT = 3000;
 
 app.use(express.json())//This function is needed and used to register json parsing middleware
 
-app.post('/friends', friendsController.postFriend);
-app.get('/friends', friendsController.getFriends)
-app.get('/friends/:friendId', friendsController.getFriend)
-
-app.get('/messages', messagesController.getMessages)
-app.post('/messages', messagesController.postMessage)
+app.use('/friends/',friendsRouter); // Here we are mounting friendsRouter to app object
+app.use('/messages', messagesRouter)
 
 app.listen(PORT, ()=>{ //This function runs when the server starts
     console.log(`Listening on Port ${PORT}...`)
@@ -54,3 +50,9 @@ app.listen(PORT, ()=>{ //This function runs when the server starts
 
 //Summaried:
 //User uses controller => Controller manipulates model => Model updates view => View sees User 
+
+
+//Express Router
+//Like a mini application that contains its own set of middleware and routes
+//Use it to break down application and make it more modular
+//Created using Express.Router();
