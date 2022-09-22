@@ -1,18 +1,21 @@
-const express = require('express')
+const express = require('express');
 
-const friendsRouter = require('./routes/friends.router')
+const path = require('path');
+
+const friendsRouter = require('./routes/friends.router');
 
 const messagesRouter = require('./routes/messages.router');
 
-const app = express() //This function is exported from express
+const app = express(); //This function is exported from express
 
 const PORT = 3000;
 
-
+app.use('/site',express.static(path.join(__dirname,'public')));//parameter is a string containing relatice path of folder we want to make available from the server.Usually with the website 
 
 app.use(express.json())//This function is needed and used to register json parsing middleware
 
 app.use('/friends/',friendsRouter); // Here we are mounting friendsRouter to app object
+
 app.use('/messages', messagesRouter)
 
 app.listen(PORT, ()=>{ //This function runs when the server starts
@@ -56,3 +59,21 @@ app.listen(PORT, ()=>{ //This function runs when the server starts
 //Like a mini application that contains its own set of middleware and routes
 //Use it to break down application and make it more modular
 //Created using Express.Router();
+
+
+
+
+//REST
+//REpresentational State Transfer ~ Standard of how to talk to servers by using HTTP Protocol
+
+//Makes heavy use of existing standards
+//End points are collections of data
+//Use GET, POST, PUT and DELETE
+//Uses client and server architecture
+//Requests are stateless and cachable ~ Each request is seperate and not connected to any state on the client thats not included in the request
+//Only keeps track of data in the collections
+//Requests keep track of state which we can cache, saving the results for future use
+
+
+//CRUD ~ Create, Read, Update Delete
+//These are the 4 basic functions we can preform on our data
