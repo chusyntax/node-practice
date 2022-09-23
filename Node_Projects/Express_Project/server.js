@@ -8,6 +8,17 @@ const messagesRouter = require('./routes/messages.router');
 
 const app = express(); //This function is exported from express
 
+app.set('view engine', 'hbs'); //To use view engine we installed
+
+app.set('views', path.join(__dirname, 'views'));
+
+app.get('/', (req, res)=>{
+    res.render('index',{
+        title:"cool meme",
+        caption:'real cool meme haha',
+    })
+})
+
 const PORT = 3000;
 
 app.use('/site',express.static(path.join(__dirname,'public')));//parameter is a string containing relatice path of folder we want to make available from the server.Usually with the website 
