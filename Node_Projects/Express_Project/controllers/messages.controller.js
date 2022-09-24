@@ -2,7 +2,13 @@ const path = require('path') //Makes it able for other operating systems to use 
 
 function getMessages (req , res ) { //Better to name functions as this way when debugging, the functions name will show
 
-    res.sendFile(path.join(__dirname,'..', 'public', 'images', 'tt.jpg'))//Takes path of file you want to send. dirname is built into Node and helps get an absolute path
+    res.render('messages',{
+
+        title:'messages to my friends',
+        friend: "Elon Musk"
+
+    })
+    //res.sendFile(path.join(__dirname,'..', 'public', 'images', 'tt.jpg'))//Takes path of file you want to send. dirname is built into Node and helps get an absolute path
     
     //res.send ('<ul><li>Hello Albert!</li></ul>') 
     }
