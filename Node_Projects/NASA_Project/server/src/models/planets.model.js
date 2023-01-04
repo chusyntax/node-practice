@@ -41,8 +41,11 @@ return new Promise((resolve,reject)=>{ // Using Promise to know when planets dat
     })
 })
 }
+function getAllPlanets(){
+    return habitablePlanets;
+}
 
 module.exports={
     loadPlanetsData,
-    planets:habitablePlanets,
+    getAllPlanets,
 }
